@@ -7,5 +7,6 @@ const Loading = () => {
     </div>
   )
 }
+// Renders loading animation while data is being fetched or processed.
 
 export default Loading
