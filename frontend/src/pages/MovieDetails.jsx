@@ -6,6 +6,7 @@ import { Heart, PlayCircleIcon, StarIcon } from 'lucide-react';
 import timeFormat from '../lib/timeFormat';
 import DateSelect from '../components/DateSelect';
 import MovieCard from '../components/MovieCard';
+import Loading from '../components/Loading';
 
 const MovieDetails = () => {
   const navigate = useNavigate();
@@ -78,14 +79,11 @@ const MovieDetails = () => {
         ))}
       </div>
       <div className='flex justify-center mt-20'>
-        <button onClick={()=>navigate('/movies')} className='px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer '>Show More</button>
+        <button onClick={()=>{navigate('/movies');scrollTo(0,0)}} className='px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer '>Show More</button>
       </div>
     </div>
   ) : (
-    // <div className="flex items-center justify-center min-h-screen">
-    <div>
-      <p className="text-gray-400">Loading movie details...</p>
-    </div>
+    <Loading/>
   )
 }
 
