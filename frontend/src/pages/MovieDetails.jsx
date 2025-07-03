@@ -57,7 +57,6 @@ const MovieDetails = () => {
 
         </div>
       </div>
-
       <p className='text-lg font-medium mt-20'>Your Favorite Cast</p>
       <div className='overflow-x-auto no-scrollbar mt-8 pb-4'>
         <div className='flex items-center gap-4 w-max px-4'>
