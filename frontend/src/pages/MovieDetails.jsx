@@ -69,6 +69,7 @@ const MovieDetails = () => {
           ))}
         </div>
       </div>
+      <DateSelect dateTime={show.dateTime}/>
 
     </div>
   ) : (
