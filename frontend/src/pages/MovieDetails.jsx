@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { dummyShowsData, dummyDateTimeData } from '../assets/assets';
 import BlurCircle from '../components/BlurCircle';
 import { Heart, PlayCircleIcon, StarIcon } from 'lucide-react';
 import timeFormat from '../lib/timeFormat';
 import DateSelect from '../components/DateSelect';
+import MovieCard from '../components/MovieCard';
 
 const MovieDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [show, setShow] = useState(null);
 
@@ -50,7 +52,7 @@ const MovieDetails = () => {
             <a href="#dateSelect" className='px-10 py-3 bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer active:scale-95'>Buy Tickets</a>
 
           <button className='bg-gray-700 p-2.5 rounded-full transition cursor-pointeractive: scale-95'>
-            <Heart classname={'w-5 h-5'}/>
+            <Heart className={'w-5 h-5'}/>
           </button>
           </div>
 
@@ -69,10 +71,19 @@ const MovieDetails = () => {
         </div>
       </div>
       <DateSelect dateTime={show.dateTime}/>
-
+      <p className='text-lg font-medium mt-20 mb-8'>You May Also Like</p>
+      <div className= 'flex flex-wrap max-sm:justify-center gap-8'>
+        {dummyShowsData.slice(0,4).map((movie, index) => (
+          <MovieCard key={index} movie={movie}/>
+        ))}
+      </div>
+      <div className='flex justify-center mt-20'>
+        <button onClick={()=>navigate('/movies')} className='px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer '>Show More</button>
+      </div>
     </div>
   ) : (
-    <div className="flex items-center justify-center min-h-screen">
+    // <div className="flex items-center justify-center min-h-screen">
+    <div>
       <p className="text-gray-400">Loading movie details...</p>
     </div>
   )
