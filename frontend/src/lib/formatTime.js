@@ -3,13 +3,12 @@
 export const formatDateTime = (isoString) => {
   const date = new Date(isoString);
   return date.toLocaleString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true, // or false for 24-hour
-    weekday: 'short',
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'Asia/Kathmandu',
+    //   hour12: true,
+      weekday: 'short',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      timeZone: 'Asia/Kathmandu',
   });
 };
