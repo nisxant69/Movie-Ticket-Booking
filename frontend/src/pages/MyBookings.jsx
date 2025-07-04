@@ -40,9 +40,14 @@ const MyBookings = () => {
             <p className='text-sm text-gray-400'>{timeFormat(item.show.movie.runtime)}</p>
             
             <p className='mt-auto text-sm text-gray-400'>{formatDateTime(item.show.showDateTime)}</p>
-
           </div>
         </div>
+
+        <div className='flex flex-col md:items-end md:text-right justify-between p-4'>
+
+        </div>
+
+
         </div>
       ))}
 
