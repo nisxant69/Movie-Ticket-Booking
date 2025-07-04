@@ -116,7 +116,6 @@ const renderSeats = (row, count = 9) => (
 
 </div>
       </div>
-    // </div>
   ) : (
     <Loading/>
   )
