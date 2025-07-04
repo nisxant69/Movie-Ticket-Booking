@@ -44,7 +44,9 @@ const MyBookings = () => {
         </div>
 
         <div className='flex flex-col md:items-end md:text-right justify-between p-4'>
-
+          <div>
+            <p className='text-2xl font-semibold mb-3'>{currency}{item.amount}</p>
+          </div>
         </div>
 
 
