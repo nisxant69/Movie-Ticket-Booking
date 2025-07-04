@@ -4,15 +4,20 @@ import { assets, dummyDateTimeData, dummyShowsData } from '../assets/assets';
 import Loading from '../components/Loading';
 import { ClockIcon } from 'lucide-react';
 import BlurCircle from '../components/BlurCircle';
+import { toast } from 'react-hot-toast';
 // import isoTimeFormat from '../lib/isoTimeFormat';
 
 const SeatLayout = () => {
-  const groupRows =[["A","B"],["C","D"],["E","F"],["G","H"],["I","J"],]
+
+  // Define the rows of seats
+  // Each row is an array of seat identifiers 
+  
+  const groupRows =[["A","B"],["C","D"],["E","F"],["G","H"],["I","J"]]
 
   //get id and date from url using params
   const {id, date} = useParams();
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [selectedTime, setSelectedTime] = useState([]);
+  const [selectedTime, setSelectedTime] = useState(null);
   const [show, setShow] = useState(null);
   const navigate = useNavigate();
 
@@ -52,7 +57,7 @@ const renderSeats = (row, count = 9) => (
           <button
             key={seatId}
             onClick={() => handleSeatClick(seatId)}
-            className={`h-8 w-8 rounded border border-primary-60 cursor-pointer ${
+            className={`h-8 w-8 rounded border border-primary/60 cursor-pointer ${
               selectedSeats.includes(seatId) && "bg-primary text-white"
             }`}
           >
@@ -94,8 +99,18 @@ const renderSeats = (row, count = 9) => (
         <img src={assets.screenImage} alt="screen"/>
         <p className='text-gray-400 text-sm mb-4'>Screen Side</p>
         <div className= 'flex flex-col items-center mt-16 text-xs text-gray-300'>
-<div className='grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-2 mb-6'>
-{groupRows[0].map(row => renderSeats(row) )}
+<div className='grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-2 mb-6 justify-items-center'>
+{groupRows[0].map((row, index) => renderSeats(row, 9) )}
+
+<div className='grid grid-cols-2 gap-11 '>
+  {groupRows.slice(1).map((group, idx) => (
+    <div key={idx}>
+      {group.map(row => renderSeats(row))}
+    </div>
+  ))}
+</div>
+
+
 </div>
 </div>
       </div>
