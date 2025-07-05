@@ -100,7 +100,7 @@ const AddShows = () => {
     <label className="block text-sm font-medium mb-2">Select Date and Time</label>
     <div className="inline-flex gap-5 border border-gray-600 p-1 pl-3 rounded-lg">
       <input type="datetime-local" value={dateTimeInput} onChange={(e) => setDateTimeInput(e.target.value)} className="outline-none rounded-md bg-transparent"/>
-      <button onClick={handleDateTimeAdd} className="bg-primary/80 text-white px-3 py-2 text-sm rounded-lg hover:bg-primary cursor-pointer">Add Time</button>
+      <button onClick={handleDateTimeAdd} className="bg-primary/80 text-white px-3 py-2 text-sm rounded-lg hover:bg-primary cursor-pointer ">Add Time</button>
     </div>
   </div>
   {/* Display Selected Times */}
@@ -129,6 +129,10 @@ const AddShows = () => {
         </ul>
     </div>
 )}
+
+<button className="bg-primary text-white px-8 py-2 mt-6 rounded
+hover:bg-primary/90 transition-all cursor-pointer rounded-2xl" >Add Show</button>
+
     </>
   ) : <Loading />
 }
