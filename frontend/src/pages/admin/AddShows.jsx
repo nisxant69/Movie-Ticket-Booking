@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { dummyShowsData } from '../../assets/assets'
 import Loading from '../../components/Loading'
 import Title from '../../components/admin/Title'
-import { CheckIcon, StarIcon } from 'lucide-react'
+import { CheckIcon, DeleteIcon, StarIcon } from 'lucide-react'
 import { kConverter } from '../../lib/kConverter'
+
 
 
 const AddShows = () => {
@@ -17,6 +18,39 @@ const AddShows = () => {
     const fetchNowPlayingMovies = async () => {
       setNowPlayingMovies(dummyShowsData)
     }
+
+    // Function to handle adding a date and time to the selection
+    const handleDateTimeAdd = () => {
+    if (!dateTimeInput) return;
+    const [date, time] = dateTimeInput.split('T');
+    if (!date || !time) return;
+
+    setDateTimeSelection((prev) => {
+        const times = prev[date] || [];
+        if (!times.includes(time)) {
+            return { ...prev, [date]: [...times, time] };
+        }
+        return prev;
+    });
+    // setDateTimeInput(''); 
+};
+
+    // Function to handle removing a time from the date selection
+    const handleRemoveTime = (date, time) => {
+    setDateTimeSelection((prev) => {
+        const filteredTimes = prev[date].filter((t) => t !== time);
+        
+        if (filteredTimes.length === 0) {
+            const { [date]: _, ...rest } = prev;
+            return rest;
+        }
+        
+        return {
+            ...prev,
+            [date]: filteredTimes
+        };
+    });
+};
 
     useEffect(() => {
       fetchNowPlayingMovies();
@@ -69,6 +103,32 @@ const AddShows = () => {
       <button onClick={handleDateTimeAdd} className="bg-primary/80 text-white px-3 py-2 text-sm rounded-lg hover:bg-primary cursor-pointer">Add Time</button>
     </div>
   </div>
+  {/* Display Selected Times */}
+  {/* Display Selected Times */}
+{Object.keys(dateTimeSelection).length > 0 && (
+    <div className="mt-6">
+        <h2 className="mb-2">Selected Date-Time</h2>
+        <ul className="space-y-3">
+            {Object.entries(dateTimeSelection).map(([date, times]) => (
+                <li key={date}>
+                    <div className="font-medium">{date}</div>
+                    <div className="flex flex-wrap gap-2 mt-1 text-sm">
+                        {times.map((time) => (
+                            <div key={time} className="border border-primary px-2 py-1 flex items-center rounded">
+                                <span>{time}</span>
+                                <DeleteIcon 
+                                    onClick={() => handleRemoveTime(date, time)} 
+                                    width={15} 
+                                    className="ml-2 text-red-500 hover:text-red-700 cursor-pointer" 
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </li>
+            ))}
+        </ul>
+    </div>
+)}
     </>
   ) : <Loading />
 }

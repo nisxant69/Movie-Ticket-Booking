@@ -25,4 +25,12 @@ body{
   scrollbar-width: none;
 }
 
+ /* Hiding ScrollBar in ListBookings.jsx */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
 
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
